@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: department-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/department_service
+    username: root
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update  # Sử dụng update trong phát triển, dùng validate hoặc none cho production
+    show-sql: true
+  main:
+    allow-circular-references: true
+  kafka:
+    bootstrap-servers: localhost:9092  # địa chỉ Kafka broker
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+server:
+  port: 5002
+  error:
+    include-stacktrace: never
+
+# Cấu hình Eureka (nếu cần)
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
+# Cấu hình JWT (nếu sử dụng)
+#jwt:
+#  expiration: 2592000
+#  expiration-refresh-token: 5184000
+#  secretkey: TaqlmGv1iEDMRiFp/pHuID1+T84IABfuA0xXh4GhiUI=
+
+# Cấu hình API prefix (nếu sử dụng)
+#api:
+#  prefix: /api/v1
