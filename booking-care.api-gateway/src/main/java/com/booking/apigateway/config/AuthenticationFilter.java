@@ -49,7 +49,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     );
 
     private final List<String> doctorEndpoints = Arrays.asList(
-            "/doctors/**"
+            "/doctor/**"
     );
 
     private final List<String> accountantEndpoints = Arrays.asList(
@@ -119,7 +119,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     private boolean isDoctorEndpoint(ServerHttpRequest request) {
         String path = request.getURI().getPath();
-        return doctorEndpoints.stream().anyMatch(endpoint -> pathMatcher.match(endpoint, path));
+        return doctorEndpoints.stream().anyMatch(endpoint -> pathMatcher.match(apiPrefix + endpoint, path));
     }
 
     private boolean isAccountantEndpoint(ServerHttpRequest request) {

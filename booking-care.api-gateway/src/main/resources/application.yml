@@ -62,9 +62,73 @@ spring:
           filters:
             - StripPrefix=2
 
-        - id: doctor-service
-          uri: http://localhost:5001
+
+        - id: medicine-service
+          uri: http://localhost:5005
           predicates:
-            - Path=${app.api-prefix}/doctors/**
+            - Path=${app.api-prefix}/medicines/**, ${app.api-prefix}/admin/medicines/**
+          filters:
+            - StripPrefix=2
+
+        - id: medicineWarehouse-service
+          uri: http://localhost:5005
+          predicates:
+            - Path=${app.api-prefix}/admin/medicine-warehouse/**
+          filters:
+            - StripPrefix=2
+
+        - id: category-service
+          uri: http://localhost:5005
+          predicates:
+            - Path=${app.api-prefix}/categories/**, ${app.api-prefix}/admin/categories/**
+          filters:
+            - StripPrefix=2
+
+        - id: file-service
+          uri: http://localhost:5005
+          predicates:
+            - Path=${app.api-prefix}/files/**
+          filters:
+            - StripPrefix=2
+
+        - id: doctor-service
+          uri: http://localhost:5006
+          predicates:
+            - Path=${app.api-prefix}/doctors/** ,${app.api-prefix}/admin/doctors/**
+          filters:
+            - StripPrefix=2
+
+        - id: file-service
+          uri: http://localhost:5006
+          predicates:
+            - Path=${app.api-prefix}/files/**
+          filters:
+            - StripPrefix=2
+
+        - id: department-service
+          uri: http://localhost:5007
+          predicates:
+            - Path=${app.api-prefix}/departments/**
+          filters:
+            - StripPrefix=2
+
+        - id: room-service
+          uri: http://localhost:5007
+          predicates:
+            - Path=${app.api-prefix}/rooms/**
+          filters:
+            - StripPrefix=2
+
+        - id: appointment-service
+          uri: http://localhost:5008
+          predicates:
+            - Path=${app.api-prefix}/appointments/**
+          filters:
+            - StripPrefix=2
+
+        - id: patient-service
+          uri: http://localhost:5009
+          predicates:
+            - Path=${app.api-prefix}/patients/**
           filters:
             - StripPrefix=2

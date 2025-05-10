@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: medicine-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/medicine_service
+    username: root
+    password: root1234
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-circular-references: true
+
+  spring:
+    kafka:
+      bootstrap-servers: localhost:9193
+      producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+      consumer:
+        group-id: medicine-service-group-v2
+        auto-offset-reset: earliest
+        enable-auto-commit: false
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        properties:
+          spring.json.trusted.packages: com.booking.event
+
+server:
+  port: 5005
+  error:
+    include-stacktrace: never
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    com.booking.controller.http.user: DEBUG
+    com.booking: DEBUG
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#
+#jwt:
+#  expiration: 2592000
+#  expiration-refresh-token: 5184000
+#  secretkey: TaqlmGv1iEDMRiFp/pHuID1+T84IABfuA0xXh4GhiUI=
+#
+#api:
+#  prefix: /api/v1
+
+
