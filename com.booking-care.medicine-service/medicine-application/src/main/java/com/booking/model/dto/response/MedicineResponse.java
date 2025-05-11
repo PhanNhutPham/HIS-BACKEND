@@ -11,6 +11,7 @@ public class MedicineResponse {
     private String medicineStatus;
     private String medicineCategoryName;
     private String medicinePrice;
+    private String dosageFormName;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

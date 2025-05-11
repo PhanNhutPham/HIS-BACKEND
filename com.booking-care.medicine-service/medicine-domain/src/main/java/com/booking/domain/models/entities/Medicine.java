@@ -32,6 +32,10 @@ public class Medicine {
     private String medicinePrice;
     private LocalDateTime create_at;
     private LocalDateTime update_at;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dosage_form_id", referencedColumnName = "dosage_form_id")
+    @JsonIgnore
+    private DosageForm dosageForm;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medicineCategory_id", referencedColumnName = "medicineCategory_id")

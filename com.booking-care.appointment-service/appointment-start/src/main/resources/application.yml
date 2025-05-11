@@ -15,7 +15,7 @@ spring:
   main:
     allow-circular-references: true
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9193
     consumer:
       group-id: appointment-group
       auto-offset-reset: earliest
@@ -31,7 +31,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 server:
-  port: 5005
+  port: 5008
   error:
     include-stacktrace: never
 

@@ -9,9 +9,11 @@ public class MedicineWarehouseResponse {
     private String medicineWarehouseId;
     private String medicineAvatar;
     private String medicineName;
-    private  String medicineQuantity;
+    private  Integer medicineQuantity;
     private String medicineStatus;
     private String medicinePrice;
+    private String medicineCategoryName;
+    private String dosageFormName;
     private LocalDateTime medicineExpirationDay;
     private  LocalDateTime dayOfEntry;
     private LocalDateTime createTime;

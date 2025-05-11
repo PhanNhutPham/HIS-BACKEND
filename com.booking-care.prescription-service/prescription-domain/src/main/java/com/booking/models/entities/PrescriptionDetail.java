@@ -17,7 +17,7 @@ public class PrescriptionDetail {
     private String prescriptionDetailId;
     @PrePersist
     public void generateId() {
-        this.prescriptionDetailId = "prsD" + UUID.randomUUID().toString().replace("-", "");
+        this.prescriptionDetailId = "prsD" + UUID.randomUUID().toString().replace("-", "").substring(0, 7);
     }
     @ManyToOne
     @JoinColumn(name = "prescription_id", nullable = false)
@@ -25,6 +25,17 @@ public class PrescriptionDetail {
     private Prescription prescription;
     @Column(name = "pres_de_dosage")
     private String dosage;
+    @Column(name = "is_out_of_stock")
+    private Boolean outOfStock;
+
+    // Getter & Setter
+    public Boolean getOutOfStock() {
+        return outOfStock;
+    }
+
+    public void setOutOfStock(Boolean outOfStock) {
+        this.outOfStock = outOfStock;
+    }
 
     @Column(name = "pres_de_frequency")
     private String frequency;

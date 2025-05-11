@@ -83,6 +83,13 @@ spring:
             - Path=${app.api-prefix}/categories/**, ${app.api-prefix}/admin/categories/**
           filters:
             - StripPrefix=2
+        - id: dosage-service
+          uri: http://localhost:5005
+          predicates:
+           - Path= ${app.api-prefix}/dosage-forms/**, ${app.api-prefix}/admin/dosage-forms/**
+          filters:
+           - StripPrefix=2
+
 
         - id: file-service
           uri: http://localhost:5005
@@ -126,9 +133,17 @@ spring:
           filters:
             - StripPrefix=2
 
+
         - id: patient-service
           uri: http://localhost:5009
           predicates:
             - Path=${app.api-prefix}/patients/**
+          filters:
+            - StripPrefix=2
+
+        - id: prescription-service
+          uri: http://localhost:5010
+          predicates:
+            - Path=${app.api-prefix}/prescriptions/**
           filters:
             - StripPrefix=2

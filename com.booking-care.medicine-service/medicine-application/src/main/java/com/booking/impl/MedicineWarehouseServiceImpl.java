@@ -65,22 +65,39 @@ public class MedicineWarehouseServiceImpl implements MedicineWarehouseService {
     private MedicineWarehouseResponse mapToResponse(MedicineWarehouse warehouse) {
         MedicineWarehouseResponse response = new MedicineWarehouseResponse();
         response.setMedicineWarehouseId(warehouse.getMedicineWarehouseId());
-        response.setMedicineQuantity(String.valueOf(warehouse.getMedicineQuantity()));
+        response.setMedicineQuantity(warehouse.getMedicineQuantity());
         response.setMedicineExpirationDay(warehouse.getMedicineExpirationDay());
         response.setDayOfEntry(warehouse.getDayOfEntry());
         response.setCreateTime(warehouse.getCreateTime());
         response.setUpdateTime(warehouse.getUpdateTime());
 
-        if (warehouse.getMedicine() != null) {
-            response.setMedicineName(warehouse.getMedicine().getMedicineName());
-            response.setMedicineAvatar(warehouse.getMedicine().getMedicineAvatar());
-            response.setMedicineStatus(warehouse.getMedicine().getMedicineStatus());
-            response.setMedicinePrice(warehouse.getMedicine().getMedicinePrice());
+        Medicine medicine = warehouse.getMedicine();
+        if (medicine != null) {
+            response.setMedicineName(medicine.getMedicineName());
+            response.setMedicineAvatar(medicine.getMedicineAvatar());
+            response.setMedicineStatus(medicine.getMedicineStatus());
+            response.setMedicinePrice(medicine.getMedicinePrice());
+
+            // Lấy tên loại thuốc
+            if (medicine.getMedicineCategory() != null) {
+                response.setMedicineCategoryName(medicine.getMedicineCategory().getMedicineCategoryName());
+            } else {
+                response.setMedicineCategoryName(null);
+            }
+
+            // Lấy dạng bào chế
+            if (medicine.getDosageForm() != null) {
+                response.setDosageFormName(medicine.getDosageForm().getDosageFormName());
+            } else {
+                response.setDosageFormName(null);
+            }
         } else {
             response.setMedicineName(null);
             response.setMedicineAvatar(null);
             response.setMedicineStatus(null);
             response.setMedicinePrice(null);
+            response.setMedicineCategoryName(null);
+            response.setDosageFormName(null);
         }
 
         return response;

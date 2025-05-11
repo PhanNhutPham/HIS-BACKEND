@@ -97,6 +97,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 .presDiagnosis(request.getPresDiagnosis())
                 .presDate(request.getPresDate())
                 .presExpiryDate(request.getPresExpiryDate())
+                .status(PrescriptionStatus.PENDING)
                 .build();
 
         // 2. Lưu đơn thuốc để có prescriptionId

@@ -33,9 +33,8 @@ public class Prescription {
     private String presDiagnosis;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "prescription_status")
-    private PrescriptionStatus status = PrescriptionStatus.PENDING;
-
+    @Column(nullable = false)
+    private PrescriptionStatus status;
 
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")

@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "Department API", description = "Quản lý thông tin khoa phòng")
 @RestController
-@RequestMapping("/api/departments")
+@RequestMapping("/departments")
 public class DepartmentController {
 
     private final DepartmentService departmentService;

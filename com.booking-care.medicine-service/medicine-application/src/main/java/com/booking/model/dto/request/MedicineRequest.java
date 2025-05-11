@@ -15,5 +15,6 @@ public class MedicineRequest {
     private String medicineStatus;
     private String medicinePrice;
     private String medicineCategory_id;
+    private String dosage_form_id;
     private String medicineAvatar;
 }

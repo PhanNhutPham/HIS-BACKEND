@@ -82,8 +82,6 @@ public class RoleService implements IRoleService{
     public Role addPermissionToRole(String roleId,  Set<PermissionRequest> permissionsRequest) throws Exception {
         Role role = roleRepository.findById(roleId)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.ROLE_NOT_FOUND));
-
-
         for (PermissionRequest permissionRequest : permissionsRequest) {
             Optional<Permission> permissionOptional = permissionRepository.findByNamePermissions(permissionRequest.getName_permission());
             if (permissionOptional.isEmpty()) {
@@ -105,38 +103,70 @@ public class RoleService implements IRoleService{
         return roleRepository.save(role);
     }
 
-    @Transactional
+//    @Transactional
+//    @Override
+//    public Role updateRole(String roleId, RoleRequest roleRequest) throws DataNotFoundException {
+//        Role role = roleRepository.findById(roleId)
+//                .orElseThrow(() -> new DataNotFoundException(ResultCode.ROLE_NOT_FOUND));
+//
+//
+//        Optional.ofNullable(roleRequest.getRole_name())
+//                .filter(role_name -> !role_name.isEmpty())
+//                .ifPresent(role::setNameRole);
+//
+//        Optional.ofNullable(roleRequest.getRole_description())
+//                .filter(role_description -> !role_description.isEmpty())
+//                .ifPresent(role::setDescription);
+//
+//        role.setUpdatedAt(LocalDateTime.now());
+//
+//        return roleRepository.save(role);
+//    }
+
+//    @Transactional
+//    @Override
+//    public void deleteRole(String roleId) throws DataNotFoundException {
+//        Role role = roleRepository.findById(roleId)
+//                .orElseThrow(() -> new DataNotFoundException(ResultCode.ROLE_NOT_FOUND));
+//
+//        List<Permission> permissions = permissionRepository.findByRole(role); // <- Sửa chỗ này
+//
+//        if (!permissions.isEmpty()) {
+//            throw new IllegalStateException("Cannot delete role with associated permissions");
+//        } else {
+//            roleRepository.deleteById(roleId);
+//        }
+//    }
+
     @Override
-    public Role updateRole(String roleId, RoleRequest roleRequest) throws DataNotFoundException {
-        Role role = roleRepository.findById(roleId)
+    public Role updateRole(String id, RoleRequest roleRequest) throws DataNotFoundException {
+        Role existingRole = roleRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.ROLE_NOT_FOUND));
 
+        existingRole.setNameRole(roleRequest.getRole_name());
+        existingRole.setDescription(roleRequest.getRole_description());
+        existingRole.setUpdatedAt(LocalDateTime.now());
 
-        Optional.ofNullable(roleRequest.getRole_name())
-                .filter(role_name -> !role_name.isEmpty())
-                .ifPresent(role::setNameRole);
+        // Cập nhật danh sách permission nếu có
+        Set<Permission> updatedPermissions = new HashSet<>();
+        if (roleRequest.getPermission_ids() != null) {
+            for (String permissionId : roleRequest.getPermission_ids()) {
+                Permission permission = permissionRepository.findById(permissionId)
+                        .orElseThrow(() -> new DataNotFoundException(ResultCode.PERMISSION_NOT_FOUND));
+                updatedPermissions.add(permission);
+            }
+            existingRole.setPermissions(updatedPermissions);
+        }
 
-        Optional.ofNullable(roleRequest.getRole_description())
-                .filter(role_description -> !role_description.isEmpty())
-                .ifPresent(role::setDescription);
-
-        role.setUpdatedAt(LocalDateTime.now());
-
-        return roleRepository.save(role);
+        return roleRepository.save(existingRole);
     }
 
-    @Transactional
     @Override
     public void deleteRole(String roleId) throws DataNotFoundException {
         Role role = roleRepository.findById(roleId)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.ROLE_NOT_FOUND));
 
-        List<Permission> permissions = permissionRepository.findByRole(role); // <- Sửa chỗ này
-
-        if (!permissions.isEmpty()) {
-            throw new IllegalStateException("Cannot delete role with associated permissions");
-        } else {
-            roleRepository.deleteById(roleId);
-        }
+        roleRepository.delete(role);
     }
+
 }

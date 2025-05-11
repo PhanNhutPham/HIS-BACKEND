@@ -14,7 +14,7 @@ import java.util.List;
 
 @Tag(name = "Prescription API", description = "Quản lý đơn thuốc")
 @RestController
-@RequestMapping("/api/prescriptions")
+@RequestMapping("/prescriptions")
 public class PrescriptionController {
 
     private final PrescriptionService prescriptionService;

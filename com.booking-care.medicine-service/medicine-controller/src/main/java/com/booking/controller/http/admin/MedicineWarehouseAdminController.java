@@ -49,7 +49,6 @@ public class MedicineWarehouseAdminController {
                 } catch (ExecutionException | InterruptedException e) {
                     System.err.println("Gửi sự kiện thiếu thuốc thất bại: " + e.getMessage());
                     Thread.currentThread().interrupt(); // xử lý interruption đúng cách
-                    // KHÔNG throw lại exception nếu không muốn listener bị fail
                 }
             }
         }

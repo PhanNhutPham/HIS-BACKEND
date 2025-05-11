@@ -17,7 +17,7 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9193
     consumer:
       group-id: patient-group-v2
       auto-offset-reset: earliest
@@ -37,6 +37,6 @@ spring:
     allow-circular-references: true
 
 server:
-  port: 5008
+  port: 5009
   error:
     include-stacktrace: never

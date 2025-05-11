@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "Patient API", description = "Quản lý thông tin bệnh nhân")
 @RestController
-@RequestMapping("/api/patients")
+@RequestMapping("/patients")
 public class PatientController {
 
     private final PatientService patientService;

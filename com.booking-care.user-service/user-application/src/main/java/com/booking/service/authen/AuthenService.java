@@ -40,10 +40,7 @@ public class AuthenService implements IAuthenService{
         Optional<User> optionalUser = Optional.empty();
         String subject = null;
 
-        if (userLoginRequest.getUsername() != null && !userLoginRequest.getUsername().isBlank()) {
-            optionalUser = userRepository.findByUsername(userLoginRequest.getUsername());
-            subject = userLoginRequest.getUsername();
-        }
+
 
         // If the user is not found by username, check by email
         if (optionalUser.isEmpty() && userLoginRequest.getEmail() != null) {
