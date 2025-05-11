@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="060ab610-50d6-40d2-b63b-fda0b3ad308f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/DoctorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-infrastructure/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../com.booking-care.user-service/user-application/src/main/java/com/booking/service/user/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.booking-care.user-service/user-application/src/main/java/com/booking/service/user/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../com.booking-care.user-service/user-application/src/main/java/com/booking/service/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.booking-care.user-service/user-application/src/main/java/com/booking/service/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../com.booking-care.user-service/user-controller/src/main/java/com/booking/controller/http/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.booking-care.user-service/user-controller/src/main/java/com/booking/controller/http/user/UserController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2ung5zC4Xk2ei67qpU2dsDfVqgU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.generated-requests | #3.executor": "Run",
+    "Maven.doctor-start [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.DoctorStartApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/BACKEND/com.booking-care.doctor-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "D:/BookingCare_Project/com.booking-care.doctor-service/doctor-start/src/main/java/com/booking/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BookingCare_Project\com.booking-care.doctor-service\doctor-start\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\BookingCare_Project\com.booking-care.doctor-service\doctor-application\src\main\java\com\booking" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DoctorStartApplication">
+    <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#3" index="3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="DoctorStartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="doctor-start" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.booking.DoctorStartApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #3" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="060ab610-50d6-40d2-b63b-fda0b3ad308f" name="Changes" comment="" />
+      <created>1742889575024</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742889575024</updated>
+      <workItem from="1742889576176" duration="1897000" />
+      <workItem from="1742960448091" duration="677000" />
+      <workItem from="1742963299952" duration="5760000" />
+      <workItem from="1742972409226" duration="4302000" />
+      <workItem from="1743034072740" duration="19000" />
+      <workItem from="1743578227336" duration="1049000" />
+      <workItem from="1743579373861" duration="1265000" />
+      <workItem from="1743686927862" duration="3534000" />
+      <workItem from="1743690923406" duration="1549000" />
+      <workItem from="1743692740338" duration="3155000" />
+      <workItem from="1743746409593" duration="2670000" />
+      <workItem from="1743749298393" duration="1635000" />
+      <workItem from="1743916454058" duration="1474000" />
+      <workItem from="1744177862305" duration="4977000" />
+      <workItem from="1744524289008" duration="2569000" />
+      <workItem from="1744527041909" duration="3419000" />
+      <workItem from="1744698995882" duration="2246000" />
+      <workItem from="1744706051319" duration="899000" />
+      <workItem from="1744707004028" duration="143000" />
+      <workItem from="1744708824514" duration="2790000" />
+      <workItem from="1744781106478" duration="15000" />
+      <workItem from="1745596087050" duration="1068000" />
+      <workItem from="1745673435433" duration="1355000" />
+      <workItem from="1745681389627" duration="8463000" />
+      <workItem from="1746203839945" duration="2924000" />
+      <workItem from="1746249221730" duration="10564000" />
+      <workItem from="1746619428021" duration="3205000" />
+      <workItem from="1746682011969" duration="4089000" />
+      <workItem from="1746721565530" duration="4963000" />
+      <workItem from="1746775327118" duration="873000" />
+      <workItem from="1746945824989" duration="1278000" />
+      <workItem from="1746957123997" duration="131000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/booking/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

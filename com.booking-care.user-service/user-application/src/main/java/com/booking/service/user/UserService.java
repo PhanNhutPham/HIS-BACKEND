@@ -13,6 +13,7 @@ import com.booking.exceptions.InvalidPasswordException;
 import com.booking.model.dto.request.*;
 
 import com.booking.model.dto.response.UserPageResponse;
+import com.booking.service.file.FileService;
 import com.booking.utils.RoleConstant;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -39,6 +41,7 @@ public class UserService implements IUserService{
     private final RoleRepository roleRepository;
     private final TokenRepository tokenRepository;
     private final WebClient.Builder webClientBuilder;
+    private final FileService fileService;
 
     @Transactional
     @Override
@@ -209,6 +212,12 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public User getUserById(String userId) throws DataNotFoundException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException(ResultCode.USER_NOT_FOUND));
+    }
+
+    @Override
     public void forgotPassword(String email) throws DataNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.USER_NOT_FOUND));
@@ -239,26 +248,20 @@ public class UserService implements IUserService{
         return false;
     }
 
+    @Override
     public void uploadAvatar(String userId, MultipartFile file) throws Exception {
         User existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.USER_NOT_FOUND));
 
         validateFileUpload(file);
 
-        WebClient webClient = webClientBuilder.build();
-
         try {
-            String imageAvatar = webClient.post()
-                    .uri("http://localhost:5002/api/v1/internal/files/upload")
-                    .contentType(MediaType.MULTIPART_FORM_DATA)
-                    .body(BodyInserters.fromMultipartData("file", file.getResource()))
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .block();
+            // Dùng fileService để lưu file trực tiếp
+            String imageAvatar = fileService.storeFile(file);
 
+            // Sau khi lưu, cập nhật tên ảnh cho user
             changeProfileImage(existingUser.getUserId(), imageAvatar);
-        } catch (Exception e) {
-            // Log and rethrow or handle the error properly
+        } catch (IOException e) {
             throw new RuntimeException("Failed to upload avatar image: " + e.getMessage(), e);
         }
     }

@@ -77,6 +77,49 @@ public class UserController {
         }
     }
 
+    @PostMapping("/uploads/{userId}")
+    public ResponseEntity<ResponseObject> uploadAvatarUser(
+            @PathVariable("userId") String userId,
+            @RequestParam("file") MultipartFile file
+    ) {
+
+        try {
+            userService.uploadAvatar(userId, file);
+            return ResponseEntity.ok().body(ResponseObject.builder()
+                    .message("Upload image avatar successfully")
+                    .status(HttpStatus.CREATED)
+                    .data(null)
+                    .build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResponseObject.builder()
+                            .message("Error uploading image: " + e.getMessage())
+                            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .build());
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<ResponseObject> getUserById(@PathVariable("userId") String userId) {
+        try {
+            User user = userService.getUserById(userId);
+            return ResponseEntity.ok(ResponseObject.builder()
+                    .status(HttpStatus.OK)
+                    .message("User fetched successfully")
+                    .data(user)
+                    .build());
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseObject.builder()
+                    .status(HttpStatus.NOT_FOUND)
+                    .message("User not found")
+                    .build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResponseObject.builder()
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .message("An error occurred: " + e.getMessage())
+                    .build());
+        }
+    }
 //    @PostMapping("/uploads/{userId}")
 //    public ResponseEntity<ResponseObject> uploadAvatarUser(
 //            @PathVariable("userId") String userId,

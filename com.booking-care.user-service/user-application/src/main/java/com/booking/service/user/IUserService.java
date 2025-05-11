@@ -24,7 +24,7 @@ public interface IUserService {
     void blockOrEnable(String userId, Boolean active) throws DataNotFoundException;
 
     void changeProfileImage(String userId, String imageName) throws Exception;
-
+    User getUserById(String userId) throws DataNotFoundException;
     void forgotPassword(String email) throws DataNotFoundException;
 
     boolean verifyOtpAndResetPassword(String email, String otp, String newPassword) throws DataNotFoundException;
