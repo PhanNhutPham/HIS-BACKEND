@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,16 +16,14 @@ public class UpdateUserRequest {
     @Size(min = 4, max = 15, message = "Username must be between 4 and 15 characters")
     private String username;
 
-    @NotBlank(message = "Firstname cannot be blank")
-    @Size(min = 2, max = 35, message = "Firstname must be between 2 and 35 characters")
-    private String firstName;
-
-    @NotBlank(message = "Lastname cannot be blank")
-    @Size(min = 2, max = 35, message = "Lastname must be between 2 and 35 characters")
-    private String lastName;
-
     @NotBlank(message = "Email cannot be blank")
     private String email;
 
     private String phoneNumber;
+
+    private LocalDate dateOfBirth;
+
+    private String gender; // Male, Female, Other
+
+    private String degree;
 }

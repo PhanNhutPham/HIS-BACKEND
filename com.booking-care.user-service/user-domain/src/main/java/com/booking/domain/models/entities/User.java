@@ -3,6 +3,8 @@ package com.booking.domain.models.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,11 +33,9 @@ public class User implements UserDetails{
     @Column(name = "username", length = 100)
     private String username;
 
-    @Column(name = "first_name", length = 35)
-    private String firstName;
-
-    @Column(name = "last_name", length = 35)
-    private String lastName;
+    private LocalDate dateOfBirth;
+    @Column(name = "gender", length = 10)
+    private String gender;
 
     @Column(name = "phone_number", length = 10)
     private String phoneNumber;

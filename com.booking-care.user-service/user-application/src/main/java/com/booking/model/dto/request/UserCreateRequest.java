@@ -27,4 +27,5 @@ public class UserCreateRequest {
     private String roomId;
     private String gender;
     private String phone;
+    private  String degree;
 }

@@ -14,6 +14,8 @@ public class UserCreatedEvent {
     private String username;
     private String email;
     private String roleName;
+    private String degree;
+    private String password;
     private String departmentId; // optional
     private String roomId;
     private String gender;

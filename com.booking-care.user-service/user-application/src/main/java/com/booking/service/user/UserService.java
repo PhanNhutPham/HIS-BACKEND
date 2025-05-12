@@ -64,12 +64,16 @@ public class UserService implements IUserService{
                 .username(userRegisterRequest.getUsername())
                 .email(userRegisterRequest.getEmail())
                 .password(passwordEncoder.encode(userRegisterRequest.getPassword()))
+                .phoneNumber(userRegisterRequest.getPhoneNumber())  // Thêm số điện thoại
+                .gender(userRegisterRequest.getGender())            // Thêm giới tính
+                .dateOfBirth(userRegisterRequest.getDateOfBirth())
                 .roles(roles)
                 .active(true)
                 .create_at(LocalDateTime.now())
                 .build();
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        return savedUser;
     }
 
     @Override
@@ -77,26 +81,24 @@ public class UserService implements IUserService{
         User existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.USER_NOT_FOUND));
 
-
         Optional.ofNullable(updateUserRequest.getUsername())
                 .filter(name -> !name.isEmpty())
-                .ifPresent( existingUser::setUsername);
-
-        Optional.ofNullable(updateUserRequest.getFirstName())
-                .filter(firstName -> !firstName.isEmpty())
-                .ifPresent( existingUser::setFirstName);
-
-        Optional.ofNullable(updateUserRequest.getLastName())
-                .filter(lastName -> !lastName.isEmpty())
-                .ifPresent(existingUser::setLastName);
+                .ifPresent(existingUser::setUsername);
 
         Optional.ofNullable(updateUserRequest.getEmail())
                 .filter(email -> !email.isEmpty())
                 .ifPresent(existingUser::setEmail);
 
         Optional.ofNullable(updateUserRequest.getPhoneNumber())
-                .filter(phoneNumber -> !phoneNumber.isEmpty())
+                .filter(phone -> !phone.isEmpty())
                 .ifPresent(existingUser::setPhoneNumber);
+
+        Optional.ofNullable(updateUserRequest.getGender())
+                .filter(gender -> !gender.isEmpty())
+                .ifPresent(existingUser::setGender);
+
+        Optional.ofNullable(updateUserRequest.getDateOfBirth())
+                .ifPresent(existingUser::setDateOfBirth);
 
         return userRepository.save(existingUser);
     }
@@ -246,6 +248,37 @@ public class UserService implements IUserService{
         }
 
         return false;
+    }
+
+    @Override
+    public User createProtocolByAdmin(UserCreateRequest request) throws ExistsException, DataNotFoundException {
+        // 1. Kiểm tra xem username hoặc email đã tồn tại chưa
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new ExistsException(ResultCode.USERNAME_ALREADY_EXISTS);
+        }
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new ExistsException(ResultCode.EMAIL_ALREADY_EXISTS);
+        }
+
+        // 2. Lấy Role từ DB
+        Role role = roleRepository.findById(request.getRoleId())
+                .orElseThrow(() -> new DataNotFoundException(ResultCode.ROLE_NOT_FOUND));
+
+        // 3. Tạo User mới
+        User newUser = User.builder()
+                .username(request.getUsername())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .phoneNumber(request.getPhone())
+                .gender(request.getGender())
+                .active(true)
+                .roles(Set.of(role))
+                .create_at(LocalDateTime.now())
+                .build();
+
+        // 4. Lưu vào DB
+        return userRepository.save(newUser);
     }
 
     @Override

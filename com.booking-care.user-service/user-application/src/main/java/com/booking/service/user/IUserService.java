@@ -28,6 +28,6 @@ public interface IUserService {
     void forgotPassword(String email) throws DataNotFoundException;
 
     boolean verifyOtpAndResetPassword(String email, String otp, String newPassword) throws DataNotFoundException;
-
+    User createProtocolByAdmin(UserCreateRequest request) throws ExistsException, DataNotFoundException;
     void uploadAvatar(String userId, MultipartFile file) throws Exception;
 }
