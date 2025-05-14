@@ -15,7 +15,7 @@ import java.util.List;
 
 @Tag(name = "Room API", description = "Quản lý thông tin phòng")
 @RestController
-@RequestMapping("/rooms")
+@RequestMapping("/admin/rooms")
 public class RoomController {
 
     private final RoomService roomService;
@@ -35,7 +35,7 @@ public class RoomController {
                 .build();
     }
 
-    @PostMapping
+    @PostMapping("/add_room")
     @Operation(summary = "Tạo phòng mới")
     public ResponseEntity<Room> createRoom(@RequestBody RoomRequest request) {
         if (request.getRoomNumber() == null || request.getRoomNumber().isEmpty()

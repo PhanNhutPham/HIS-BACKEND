@@ -20,4 +20,9 @@ public class ResponseObject {
     @JsonProperty("data")
     private Object data;
     private Object result;
+    public ResponseObject(String message, HttpStatus status) {
+        this.message = message;
+        this.status = status;
+        this.data = null;
+    }
 }
