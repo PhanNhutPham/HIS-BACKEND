@@ -33,7 +33,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private final List<String> publicEndpoints = Arrays.asList(
             "/auth/**",
             "/account/**",
-            "/ratings/**"
+            "/notification/**"
     );
 
     private final List<String> adminEndpoints = Arrays.asList(
