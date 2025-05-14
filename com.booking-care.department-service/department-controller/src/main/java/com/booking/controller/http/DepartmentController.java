@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "Department API", description = "Quản lý thông tin khoa phòng")
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/admin/departments")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
@@ -33,7 +33,7 @@ public class DepartmentController {
         return ResponseEntity.ok("Gửi event gán bác sĩ vào khoa thành công");
     }
 
-    @PostMapping
+    @PostMapping("/add_department")
     @Operation(summary = "Tạo khoa mới")
     public ResponseEntity<Department> createDepartment(@Valid @RequestBody DepartmentRequest request) {
         Department department = Department.builder()
@@ -44,8 +44,6 @@ public class DepartmentController {
         Department saved = departmentService.createDepartment(department);
 
         // Gửi sự kiện Kafka sau khi đã có ID
-        kafkaProducerService.sendDepartmentEventCreateAsync(new DepartmentEventRequest(
-                saved.getDepartment_id(), saved.getName(), "CREATE"));
 
         return ResponseEntity.ok(saved);
     }

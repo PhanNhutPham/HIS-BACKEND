@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="060ab610-50d6-40d2-b63b-fda0b3ad308f" name="Changes" comment="" />
+    <list default="true" id="060ab610-50d6-40d2-b63b-fda0b3ad308f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-application/src/main/java/com/booking/impl/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-application/src/main/java/com/booking/impl/DoctorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-application/src/main/java/com/booking/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-application/src/main/java/com/booking/service/DoctorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/admin/DoctorAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/admin/DoctorAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-infrastructure/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-infrastructure/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-infrastructure/src/main/java/com/booking/infrastructure/kafka/KafkaConsumerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-infrastructure/src/main/java/com/booking/infrastructure/kafka/config/KafkaConsumerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-start/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-start/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,6 +38,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2ung5zC4Xk2ei67qpU2dsDfVqgU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -43,13 +55,14 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.DoctorStartApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Final_Backend/com.booking-care.medicine-service",
+    "last_opened_file_path": "D:/BACKEND/com.booking-care.doctor-service",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +87,12 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\BookingCare_Project\com.booking-care.doctor-service\doctor-application\src\main\java\com\booking" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.booking.domain.models.enums" />
+      <recent name="com.booking.infrastructure.kafka.service" />
+      <recent name="com.booking.infrastructure.kafka.event" />
+      <recent name="com.booking.infrastructure.kafka.config" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.DoctorStartApplication">
@@ -156,6 +175,10 @@
       <workItem from="1746896319294" duration="352000" />
       <workItem from="1746897278170" duration="5613000" />
       <workItem from="1746957278923" duration="185000" />
+      <workItem from="1747199040075" duration="1315000" />
+      <workItem from="1747202097865" duration="506000" />
+      <workItem from="1747203089413" duration="179000" />
+      <workItem from="1747211785399" duration="769000" />
     </task>
     <servers />
   </component>
