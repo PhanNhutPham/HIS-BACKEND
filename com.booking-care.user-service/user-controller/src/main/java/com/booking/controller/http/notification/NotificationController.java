@@ -4,6 +4,7 @@ package com.booking.controller.http.notification;
 import com.booking.exceptions.DataNotFoundException;
 import com.booking.model.dto.request.OtpRequest;
 import com.booking.model.dto.request.PasswordResetVerifyRequest;
+import com.booking.service.email.EmailService;
 import com.booking.service.email.IEmailService;
 import com.booking.service.user.IUserService;
 import jakarta.mail.MessagingException;
@@ -21,7 +22,7 @@ import java.util.Random;
 @RequestMapping("/notification")
 @RequiredArgsConstructor
 public class NotificationController {
-    private final IEmailService emailService;
+    private final EmailService emailService;
     private final IUserService userService;
     @PostMapping("/sendOtp")
     public ResponseEntity<String> sendOtp(@RequestBody OtpRequest otpRequest) throws MessagingException {
@@ -46,10 +47,10 @@ public class NotificationController {
     }
     @PostMapping("/reset-password")
     public ResponseEntity<String> verifyOtpAndResetPassword(@RequestBody PasswordResetVerifyRequest request) throws DataNotFoundException {
-        boolean success = userService.verifyOtpAndResetPassword(
-                request.getEmail(),
+        boolean success = emailService.verifyOtpAndResetPassword(
                 request.getOtp(),
-                request.getNewPassword()
+                request.getNewPassword(),
+                request.getConfirmNewPassword()
         );
         if (success) {
             return ResponseEntity.ok("Password reset successful.");

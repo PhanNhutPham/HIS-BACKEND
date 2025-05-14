@@ -15,7 +15,7 @@ spring:
   main:
     allow-circular-references: true
   kafka:
-    bootstrap-servers: localhost:9092  # địa chỉ Kafka broker
+    bootstrap-servers: localhost:9193  # địa chỉ Kafka broker
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

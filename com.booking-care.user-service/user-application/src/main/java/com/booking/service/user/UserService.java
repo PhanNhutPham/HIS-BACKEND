@@ -102,6 +102,9 @@ public class UserService implements IUserService{
 
         Optional.ofNullable(updateUserRequest.getDateOfBirth())
                 .ifPresent(existingUser::setDateOfBirth);
+        Optional.ofNullable(updateUserRequest.getAddress())
+                .filter(address -> !address.isEmpty())
+                .ifPresent(existingUser::setAddress);
 
         return userRepository.save(existingUser);
     }
@@ -183,19 +186,36 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public void resetPassword(String userId, ResetPasswordRequest resetPasswordRequest) throws InvalidPasswordException, DataNotFoundException {
+    public void resetPassword(String userId, ResetPasswordRequest resetPasswordRequest)
+            throws InvalidPasswordException, DataNotFoundException {
+
+        // Tìm người dùng trong cơ sở dữ liệu
         User existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException(ResultCode.USER_NOT_FOUND));
 
+        // Kiểm tra mật khẩu cũ có khớp không
         if (!passwordEncoder.matches(resetPasswordRequest.getOldPassword(), existingUser.getPassword())) {
             throw new InvalidPasswordException("Old password is incorrect");
         }
 
+        // Kiểm tra mật khẩu mới có khác với mật khẩu cũ không
+        if (resetPasswordRequest.getOldPassword().equals(resetPasswordRequest.getNewPassword())) {
+            throw new InvalidPasswordException("New password must be different from old password");
+        }
+
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới có trùng khớp không
+        if (!resetPasswordRequest.getNewPassword().equals(resetPasswordRequest.getConfirmNewPassword())) {
+            throw new InvalidPasswordException("New password and confirm password do not match");
+        }
+
+        // Mã hóa mật khẩu mới và lưu lại
         String encodedPassword = passwordEncoder.encode(resetPasswordRequest.getNewPassword());
         existingUser.setPassword(encodedPassword);
 
+        // Lưu người dùng với mật khẩu mới vào cơ sở dữ liệu
         userRepository.save(existingUser);
 
+        // Xóa tất cả các token cũ của người dùng
         List<Token> tokens = tokenRepository.findByUser(existingUser);
         tokenRepository.deleteAll(tokens);
     }
@@ -357,6 +377,7 @@ public class UserService implements IUserService{
         dto.setProfileImage(user.getProfileImage());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
+        dto.setAddress(user.getAddress());
         dto.setPhoneNumber(user.getPhoneNumber());
         dto.setGender(user.getGender());
         dto.setDateOfBirth(user.getDateOfBirth());

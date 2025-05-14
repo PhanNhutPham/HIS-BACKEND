@@ -13,7 +13,9 @@ public class ResetPasswordRequest {
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 7, max = 35, message = "Password must be between 7 and 35 characters")
     private String oldPassword;
-
+    @NotBlank(message = "Confirm password cannot be blank")
+    @Size(min = 7, max = 35, message = "Confirm password must be between 7 and 35 characters")
+    private String confirmNewPassword;
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 7, max = 35, message = "Password must be between 7 and 35 characters")
     private String newPassword;

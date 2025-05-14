@@ -2,6 +2,7 @@ package com.booking.controller.http.admin;
 
 import com.booking.enums.ResultCode;
 import com.booking.exceptions.DataNotFoundException;
+import com.booking.infrastructure.kafka.event.CreateWorkScheduleEvent;
 import com.booking.infrastructure.persistence.mapper.DoctorJPA;
 import com.booking.model.dto.request.AssignDoctorEvent;
 import com.booking.model.dto.request.DoctorCreateEvent;
@@ -89,7 +90,18 @@ public class DoctorAdminController {
 //    public ResponseEntity<DoctorResponse> getDoctor(@PathVariable("id") String id) {
 //        return ResponseEntity.ok(doctorService.getDoctor(id));
 //    }
+@PostMapping("/{doctorId}/work-schedule")
+public ResponseEntity<String> createWorkSchedule(
+        @PathVariable("doctorId") String doctorId,
+        @RequestBody CreateWorkScheduleEvent request) {
+    try {
+        doctorService.createWorkSchedule(doctorId, request);
+        return ResponseEntity.ok("Work schedule event created successfully for doctor ID: " + doctorId);
+    } catch (Exception e) {
+        return ResponseEntity.status(500).body("Failed to create work schedule: " + e.getMessage());
+    }
 
+}
     @GetMapping
     @Operation(summary = "Lấy danh sách tất cả bác sĩ")
     public ResponseEntity<List<DoctorResponse>> getAllDoctors() {

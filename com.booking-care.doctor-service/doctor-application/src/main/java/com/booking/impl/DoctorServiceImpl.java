@@ -3,6 +3,8 @@ package com.booking.impl;
 import com.booking.domain.models.entities.Doctor;
 import com.booking.exceptions.DataNotFoundException;
 import com.booking.exceptions.InvalidPasswordException;
+import com.booking.infrastructure.kafka.event.CreateWorkScheduleEvent;
+import com.booking.infrastructure.kafka.service.KafkaProducerService;
 import com.booking.model.dto.request.ResetPasswordRequest;
 import com.booking.model.dto.response.DoctorResponse;
 import com.booking.service.DoctorService;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
-
+    private final KafkaProducerService kafkaProducerService;
     private final DoctorJPA doctorRepository;
     private final IFileService fileService;
 
@@ -237,6 +239,39 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor updated = doctorRepository.save(doctor);
 
         return new DoctorResponse(updated);
+    }
+
+    @Override
+    public void createWorkSchedule(String doctorId, CreateWorkScheduleEvent request) {
+        if (doctorId == null || doctorId.isEmpty()) {
+            throw new IllegalArgumentException("Doctor ID cannot be null or empty");
+        }
+
+        if (request == null) {
+            throw new IllegalArgumentException("Work schedule request cannot be null");
+        }
+        if (request.getWScheduleHours() == null || request.getWScheduleHours().isEmpty()) {
+            System.out.println("Warning: Work schedule hours are null or empty");
+        } else {
+            System.out.println("Work schedule hours: " + request.getWScheduleHours());
+        }
+        // Lấy thông tin doctor từ DB để lấy userId
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new RuntimeException("Doctor not found with ID: " + doctorId));
+        // Tạo sự kiện mới
+        CreateWorkScheduleEvent event = new CreateWorkScheduleEvent();
+        event.setDoctorId(doctor.getDoctor_id()); // Lấy userId từ entity Doctor
+        event.setWScheduleStatus(request.getWScheduleStatus());
+        event.setWScheduleHours(request.getWScheduleHours());
+        event.setCreatedByStaffId(request.getCreatedByStaffId());
+        event.setEndTime(request.getEndTime());
+        event.setRegularSchedule(request.getRegularSchedule());
+        event.setExceptions(request.getExceptions());
+
+        // Gửi event đến Kafka
+
+        kafkaProducerService.sendCreateWorkScheduleEvent(event);
+
     }
 
 
