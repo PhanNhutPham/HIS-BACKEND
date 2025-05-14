@@ -147,3 +147,11 @@ spring:
             - Path=${app.api-prefix}/prescriptions/**
           filters:
             - StripPrefix=2
+
+
+        - id: medicalRecord-service
+          uri: http://localhost:5012
+          predicates:
+            - Path=${app.api-prefix}/medical-records/**
+          filters:
+            - StripPrefix=2
