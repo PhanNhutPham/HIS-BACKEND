@@ -90,10 +90,12 @@ public class MedicineServiceImpl implements MedicineService {
             response.setUpdateTime(medicine.getUpdate_at());
             response.setMedicinePrice(medicine.getMedicinePrice());
 
-            if (medicine.getMedicineCategory() != null) {
+            if (medicine.getMedicineCategory() != null || medicine.getDosageForm() != null) {
                 response.setMedicineCategoryName(medicine.getMedicineCategory().getMedicineCategoryName());
+                response.setDosageFormName(medicine.getDosageForm().getDosageFormName());
             } else {
-                response.setMedicineCategoryName(null); // Trả về null nếu không có category
+                response.setMedicineCategoryName(null);
+                response.setDosageFormName(null);// Trả về null nếu không có category
             }
 
             return response;

@@ -1,6 +1,8 @@
 package com.booking.controller.http.notification;
 
 
+import com.booking.domain.models.entities.User;
+import com.booking.domain.repositories.UserRepository;
 import com.booking.exceptions.DataNotFoundException;
 import com.booking.model.dto.request.OtpRequest;
 import com.booking.model.dto.request.PasswordResetVerifyRequest;
@@ -11,19 +13,22 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 @RestController
 @RequestMapping("/notification")
 @RequiredArgsConstructor
 public class NotificationController {
-    private final EmailService emailService;
-    private final IUserService userService;
+    private final IEmailService emailService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
     @PostMapping("/sendOtp")
     public ResponseEntity<String> sendOtp(@RequestBody OtpRequest otpRequest) throws MessagingException {
         String email = otpRequest.getEmail();
@@ -69,8 +74,13 @@ public class NotificationController {
     }
 
     private void saveOtpInCacheOrDb(String email, String otp) {
-        // Lưu OTP vào Redis hoặc Database nếu bạn muốn xác minh sau này
-        // Example: cache.put(email, otp);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setOtp(passwordEncoder.encode(otp));
+        user.setExpiryOtp(LocalDateTime.now().plusMinutes(2));
+        userRepository.save(user);
     }
+
 
 }
