@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                             .requestMatchers("/account/register").permitAll()
                             .requestMatchers("/notification/sendOtp").permitAll()
                             .requestMatchers("/notification/reset-password").permitAll()
+                            .requestMatchers("/notification/verify-otp").permitAll()
                             .anyRequest()
                             .authenticated();
 

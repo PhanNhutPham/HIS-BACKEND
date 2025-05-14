@@ -108,4 +108,27 @@ public class EmailService implements IEmailService {
         }
     }
 
+    @Override
+    public String verifyOtp(String otp) {
+        List<User> users = userRepository.findAll().stream()
+                .filter(user -> user.getOtp() != null
+                        && passwordEncoder.matches(otp, user.getOtp())
+                        && user.getExpiryOtp() != null
+                        && user.getExpiryOtp().isAfter(LocalDateTime.now()))
+                .toList();
+
+        return users.isEmpty() ? null : users.get(0).getEmail();
+    }
+
+    @Override
+    public void updatePasswordByEmail(String email, String newPassword) throws DataNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new DataNotFoundException(ResultCode.USER_NOT_FOUND));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setOtp(null);
+        user.setExpiryOtp(null);
+        userRepository.save(user);
+    }
+
 }
