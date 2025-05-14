@@ -115,14 +115,14 @@ spring:
         - id: department-service
           uri: http://localhost:5007
           predicates:
-            - Path=${app.api-prefix}/departments/**
+            - Path=${app.api-prefix}/admin/departments/**
           filters:
             - StripPrefix=2
 
         - id: room-service
           uri: http://localhost:5007
           predicates:
-            - Path=${app.api-prefix}/rooms/**
+            - Path=${app.api-prefix}/admin/rooms/**
           filters:
             - StripPrefix=2
 
