@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="060ab610-50d6-40d2-b63b-fda0b3ad308f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../com.booking-care.department-service/department-controller/src/main/java/com/booking/controller/http/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.booking-care.department-service/department-controller/src/main/java/com/booking/controller/http/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../com.booking-care.department-service/department-controller/src/main/java/com/booking/controller/http/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.booking-care.department-service/department-controller/src/main/java/com/booking/controller/http/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-care.api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-care.api-gateway/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor-application/src/main/java/com/booking/model/dto/response/ResponseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-application/src/main/java/com/booking/model/dto/response/ResponseObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/admin/DoctorAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/admin/DoctorAdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/open/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-controller/src/main/java/com/booking/controller/http/open/DoctorController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,11 +49,11 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.DoctorStartApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/BACKEND/com.booking-care.department-service",
+    "last_opened_file_path": "D:/BACKEND/com.booking-care.doctor-service",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -165,6 +161,7 @@
       <workItem from="1746897278170" duration="5613000" />
       <workItem from="1746957278923" duration="185000" />
       <workItem from="1747199040075" duration="1315000" />
+      <workItem from="1747202097865" duration="506000" />
     </task>
     <servers />
   </component>
