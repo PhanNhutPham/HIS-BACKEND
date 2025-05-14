@@ -24,6 +24,6 @@ public class UpdateUserRequest {
     private LocalDate dateOfBirth;
 
     private String gender; // Male, Female, Other
-
+    private String address;
     private String degree;
 }

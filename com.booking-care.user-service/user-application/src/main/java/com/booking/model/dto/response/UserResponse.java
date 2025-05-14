@@ -17,6 +17,7 @@ public class UserResponse {
     private String gender;
     private LocalDate dateOfBirth;
     private LocalDateTime create_at;
+    private String address;
     private LocalDateTime update_at;
 
 

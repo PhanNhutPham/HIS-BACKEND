@@ -1,6 +1,7 @@
 package com.booking.controller.http.admin;
 
 import com.booking.domain.models.entities.Medicine;
+import com.booking.impl.MedicineServiceImpl;
 import com.booking.model.dto.request.MedicineCreateEvent;
 import com.booking.model.dto.request.MedicineRequest;
 import com.booking.model.dto.response.MedicineResponse;
@@ -26,7 +27,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/admin/medicines")
 public class MedicineAdminController {
-    private final MedicineService medicineService;
+    private final MedicineServiceImpl medicineService;
     private final ObjectMapper objectMapper;
 
 
