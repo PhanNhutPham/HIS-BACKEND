@@ -9,7 +9,7 @@ public class MedicineWarehouseResponse {
     private String medicineWarehouseId;
     private String medicineAvatar;
     private String medicineName;
-    private  Integer medicineQuantity;
+    private  String medicineQuantity;
     private String medicineStatus;
     private String medicinePrice;
     private String medicineCategoryName;

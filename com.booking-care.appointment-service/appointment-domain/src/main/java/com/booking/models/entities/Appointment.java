@@ -3,6 +3,8 @@ package com.booking.models.entities;
 import com.booking.models.enums.AppointmentStatus;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -24,15 +26,17 @@ public class Appointment {
 
     private String departmentId; // ID khoa/phòng khám
 
-    private LocalDateTime appointmentDate; // Ngày giờ cuộc hẹn
+    private LocalDate appointmentDate; // Ngày giờ cuộc hẹn
     private String reason; // Lý do khám
     private String symptoms; // Triệu chứng bệnh nhân gặp phải
 
     @Enumerated(EnumType.STRING)
-    private AppointmentStatus status; // Trạng thái cuộc hẹn: "Scheduled", "Completed", "Cancelled"
+    @Column(name = "status", length = 20)
+    private AppointmentStatus status;
+
+    // Trạng thái cuộc hẹn: "Scheduled", "Completed", "Cancelled"
 
     private String appointmentNotes; // Ghi chú (bác sĩ, bệnh nhân)
-
     private LocalDateTime createdAt; // Thời gian tạo
     private LocalDateTime updatedAt; // Thời gian cập nhật
 

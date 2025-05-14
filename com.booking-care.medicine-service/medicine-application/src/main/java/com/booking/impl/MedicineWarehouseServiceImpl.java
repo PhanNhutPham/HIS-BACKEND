@@ -35,7 +35,7 @@ public class MedicineWarehouseServiceImpl implements MedicineWarehouseService {
 
             MedicineWarehouse warehouse = MedicineWarehouse.builder()
                     .medicine(medicine)
-                    .medicineQuantity(Integer.valueOf(request.getMedicineQuantity()))
+                    .medicineQuantity(request.getMedicineQuantity())
                     .medicineExpirationDay(request.getMedicineExpirationDay())
                     .dayOfEntry(request.getDayOfEntry())
                     .createTime(LocalDateTime.now())
@@ -47,6 +47,7 @@ public class MedicineWarehouseServiceImpl implements MedicineWarehouseService {
 
         return medicineWarehouseRepository.saveAll(warehouses);
     }
+
 
     @Override
     public MedicineWarehouseResponse getMedicineWarehouse(String id) {
@@ -103,13 +104,12 @@ public class MedicineWarehouseServiceImpl implements MedicineWarehouseService {
         return response;
     }
 
-
     @Override
     public MedicineWarehouseResponse updateMedicineWarehouse(String id, MedicineWarehouseRequest request) {
         MedicineWarehouse warehouse = medicineWarehouseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy kho thuốc với ID: " + id));
 
-        warehouse.setMedicineQuantity(Integer.valueOf(request.getMedicineQuantity()));
+        warehouse.setMedicineQuantity(request.getMedicineQuantity());
         warehouse.setMedicineExpirationDay(request.getMedicineExpirationDay());
         warehouse.setDayOfEntry(request.getDayOfEntry());
 
@@ -123,7 +123,6 @@ public class MedicineWarehouseServiceImpl implements MedicineWarehouseService {
 
         return mapToResponse(saved);
     }
-
     @Override
     public void deleteMedicineWarehouse(String id) {
         MedicineWarehouse warehouse = medicineWarehouseRepository.findById(id)

@@ -24,7 +24,7 @@ public class AppointmentRequest {
     private LocalDate dateOfBirth;
     private String email;
     private String appointmentNotes;
-    private LocalDateTime appointmentDate;
+    private LocalDate appointmentDate;
     private String departmentId;
     private String doctorId;
     private String reason;

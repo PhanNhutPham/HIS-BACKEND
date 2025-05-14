@@ -1,6 +1,7 @@
 package com.booking.impl;
 
 import com.booking.config.kafka.KafkaProducerConfig;
+import com.booking.event.AppointmentConfirmed;
 import com.booking.event.AppointmentRequestInitiated;
 import com.booking.mapper.AppointmentJPA;
 import com.booking.models.entities.Appointment;
@@ -88,7 +89,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.saveAll(appointments);
     }
 
-
     @Override
     public Appointment getAppointmentById(String id) {
         return appointmentRepository.findById(id)
@@ -111,5 +111,31 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void deleteAllAppointments(String patientId) {
         List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
         appointmentRepository.deleteAll(appointments);
+    }
+
+    // Phương thức xác nhận lịch hẹn
+    @Override
+    public Appointment confirmAppointment(String appointmentId) {
+        Appointment appointment = getAppointmentById(appointmentId);
+        appointment.setStatus(AppointmentStatus.CONFIRMED);  // Cập nhật trạng thái thành CONFIRMED
+        appointment.setUpdatedAt(LocalDateTime.now());
+        Appointment savedAppointment = appointmentRepository.save(appointment);
+        AppointmentConfirmed event = new AppointmentConfirmed (
+                savedAppointment.getAppointmentId(),
+                savedAppointment.getPatientId(),
+                savedAppointment.getDoctorId(),
+                savedAppointment.getAppointmentDate(),
+                savedAppointment.getStatus().name()
+        );
+        kafkaProducerService.sendAppointmentConfirmEvent(event);
+        return appointmentRepository.save(savedAppointment);
+    }
+
+    @Override
+    public Appointment rejectAppointment(String appointmentId) {
+        Appointment appointment = getAppointmentById(appointmentId);
+        appointment.setStatus(AppointmentStatus.CANCELLED); // Thay đổi trạng thái thành CANCELLED
+        appointment.setUpdatedAt(LocalDateTime.now());
+        return appointmentRepository.save(appointment);
     }
 }

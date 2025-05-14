@@ -12,7 +12,9 @@ public interface AppointmentService {
 
     // Phương thức cập nhật lịch hẹn theo ID
     Appointment updateAppointment(Appointment appointment, String id);
+
     List<Appointment> updateAppointmentsWithPatientId(String userId, String patientId);
+
     // Phương thức lấy lịch hẹn theo ID
     Appointment getAppointmentById(String id);
 
@@ -24,4 +26,10 @@ public interface AppointmentService {
 
     // Phương thức xóa tất cả lịch hẹn của bệnh nhân theo patientId
     void deleteAllAppointments(String patientId);
+
+    // Phương thức xác nhận cuộc hẹn
+    Appointment confirmAppointment(String appointmentId);
+
+    // Phương thức từ chối cuộc hẹn
+    Appointment rejectAppointment(String appointmentId);
 }

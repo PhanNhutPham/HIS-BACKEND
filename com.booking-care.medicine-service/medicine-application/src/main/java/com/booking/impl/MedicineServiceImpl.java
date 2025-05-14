@@ -1,8 +1,10 @@
 package com.booking.impl;
 
+import com.booking.domain.models.entities.DosageForm;
 import com.booking.domain.models.entities.Medicine;
 import com.booking.domain.models.entities.MedicineCategory;
 import com.booking.exceptions.DataNotFoundException;
+import com.booking.infrastructure.persistence.mapper.DosageFormJPA;
 import com.booking.infrastructure.persistence.mapper.MedicineCategoryJPA;
 import com.booking.infrastructure.persistence.mapper.MedicineJPA;
 import com.booking.model.dto.request.MedicineRequest;
@@ -26,6 +28,7 @@ public class MedicineServiceImpl implements MedicineService {
     private final MedicineJPA medicineRepository;
     private final MedicineCategoryJPA medicineCategoryJPA;
     private final IFileService fileService;
+    private final DosageFormJPA dosageFormJPA;
     @Override
     public List<Medicine> createMedicine(List<MedicineRequest> requests) {
         List<Medicine> medicines = new ArrayList<>();
@@ -33,7 +36,8 @@ public class MedicineServiceImpl implements MedicineService {
         for (MedicineRequest request : requests) {
             MedicineCategory category = medicineCategoryJPA.findById(request.getMedicineCategory_id())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
-
+            DosageForm dosageForm = dosageFormJPA.findById(request.getDosage_form_id())
+                    .orElseThrow(() -> new RuntimeException("Dosage Form not found"));
             Medicine medicine = Medicine.builder()
                     .medicineName(request.getMedicineName())
                     .medicineStatus(request.getMedicineStatus())
@@ -42,6 +46,7 @@ public class MedicineServiceImpl implements MedicineService {
                     .medicineAvatar(request.getMedicineAvatar())
                     .medicinePrice(request.getMedicinePrice())
                     .medicineCategory(category)
+                    .dosageForm(dosageForm)
                     .build();
 
             medicines.add(medicine);
@@ -71,8 +76,15 @@ public class MedicineServiceImpl implements MedicineService {
             response.setMedicineCategoryName(null); // Trả về null nếu không có category
         }
 
+        if (medicine.getDosageForm() != null) {
+            response.setDosageFormName(medicine.getDosageForm().getDosageFormName());
+        } else {
+            response.setDosageFormName(null);
+        }
+
         return response;
     }
+
 
 
 
@@ -150,6 +162,10 @@ public class MedicineServiceImpl implements MedicineService {
                 .orElseThrow(() -> new RuntimeException("Category not found with ID: " + request.getMedicineCategory_id()));
         medicine.setMedicineCategory(category);
 
+        DosageForm dosageForm = dosageFormJPA.findById(request.getDosage_form_id())
+                .orElseThrow(() -> new RuntimeException("DosageForm not found with ID: " + request.getDosage_form_id()));
+        medicine.setDosageForm(dosageForm);
+
         medicine.setUpdate_at(LocalDateTime.now());
         Medicine saved = medicineRepository.save(medicine);
 
@@ -159,6 +175,7 @@ public class MedicineServiceImpl implements MedicineService {
         resp.setMedicineStatus(saved.getMedicineStatus());
         resp.setMedicineAvatar(saved.getMedicineAvatar());
         resp.setMedicineCategoryName(saved.getMedicineCategory().getMedicineCategoryName());
+        resp.setDosageFormName(saved.getDosageForm() != null ? saved.getDosageForm().getDosageFormName() : null);
         resp.setMedicinePrice(saved.getMedicinePrice());
         resp.setCreateTime(saved.getCreate_at());
         resp.setUpdateTime(saved.getUpdate_at());
