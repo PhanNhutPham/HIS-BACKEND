@@ -8,13 +8,17 @@ import com.booking.infrastructure.persistence.mapper.UserJPA;
 import com.booking.model.dto.request.UserCreateRequest;
 import com.booking.model.dto.request.UserCreatedEvent;
 import com.booking.model.dto.response.UserPageResponse;
+import com.booking.model.dto.response.UserResponse;
 import com.booking.service.kafka.KafkaProducerService;
 import com.booking.service.user.IUserService;
+import com.booking.service.user.UserService;
 import com.booking.utils.PageConstant;
 import jakarta.validation.Valid;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.UrlResource;
@@ -30,7 +34,7 @@ import com.booking.model.dto.response.ResponseObject;
 @RequestMapping("/admin/users")
 public class UserAdminController {
 
-    private final IUserService userService;
+    private final UserService userService;
     private final KafkaProducerService kafkaProducerService;
     private final UserJPA userRepository;
 
@@ -61,6 +65,11 @@ public class UserAdminController {
                 .status(HttpStatus.OK)
                 .data(null)
                 .build());
+    }
+    @GetMapping("/role-user")
+    public ResponseEntity<List<UserResponse>> getUsersWithUserRole() {
+        List<UserResponse> users = userService.getAllUsersWithUserRole();
+        return ResponseEntity.ok(users);
     }
     @GetMapping("/avatar/{userId}")
     public ResponseEntity<?> getAvatar(@PathVariable("userId") String userId) {

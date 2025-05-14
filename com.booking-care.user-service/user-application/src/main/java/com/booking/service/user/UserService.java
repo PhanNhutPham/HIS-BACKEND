@@ -10,9 +10,11 @@ import com.booking.enums.ResultCode;
 import com.booking.exceptions.DataNotFoundException;
 import com.booking.exceptions.ExistsException;
 import com.booking.exceptions.InvalidPasswordException;
+import com.booking.infrastructure.persistence.mapper.UserJPA;
 import com.booking.model.dto.request.*;
 
 import com.booking.model.dto.response.UserPageResponse;
+import com.booking.model.dto.response.UserResponse;
 import com.booking.service.file.FileService;
 import com.booking.utils.RoleConstant;
 
@@ -42,6 +44,7 @@ public class UserService implements IUserService{
     private final TokenRepository tokenRepository;
     private final WebClient.Builder webClientBuilder;
     private final FileService fileService;
+    private final UserJPA userJPA;
 
     @Transactional
     @Override
@@ -340,6 +343,26 @@ public class UserService implements IUserService{
         if (contentType == null || !contentType.startsWith("image/")) {
             throw new IllegalArgumentException("File must be an image");
         }
+    }
+    public List<UserResponse> getAllUsersWithUserRole() {
+        return userJPA.findUsersByRoleName("USER")
+                .stream()
+                .map(this::convertToUserResponse)
+                .toList();
+    }
+
+    private UserResponse convertToUserResponse(User user) {
+        UserResponse dto = new UserResponse();
+        dto.setUserId(user.getUserId());
+        dto.setProfileImage(user.getProfileImage());
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        dto.setPhoneNumber(user.getPhoneNumber());
+        dto.setGender(user.getGender());
+        dto.setDateOfBirth(user.getDateOfBirth());
+        dto.setCreate_at(user.getCreate_at());
+        dto.setUpdate_at(user.getUpdate_at());
+        return dto;
     }
 
 }
